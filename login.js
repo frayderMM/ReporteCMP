@@ -10,7 +10,7 @@
   form.addEventListener('submit', event => {
     event.preventDefault();
     if (username.value !== 'fmezam' || password.value !== '11') {
-      error.textContent = 'Usuario o contrase?a incorrectos.';
+      error.textContent = 'Usuario o contraseña incorrectos.';
       password.value = '';
       password.focus();
       return;

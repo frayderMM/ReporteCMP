@@ -232,12 +232,12 @@ button:focus-visible,select:focus-visible{outline:3px solid #773247;outline-offs
     <form id="loginForm">
       <label for="username">Usuario</label>
       <input id="username" name="username" autocomplete="username" required autocapitalize="none" spellcheck="false">
-      <label for="password">Contrase?a</label>
+      <label for="password">Contraseña</label>
       <input id="password" name="password" type="password" autocomplete="current-password" required>
       <button class="login-submit" type="submit">Ingresar</button>
       <p id="loginError" class="login-error" role="alert" aria-live="polite"></p>
     </form>
-    <p class="login-note">Acceso de demostraci?n ? Cat?logo de ejemplos.</p>
+    <p class="login-note">Acceso de demostración · Catálogo de ejemplos.</p>
     <noscript><p>Activa JavaScript para usar el formulario.</p></noscript>
   </div>
 </section>
@@ -256,7 +256,8 @@ button:focus-visible,select:focus-visible{outline:3px solid #773247;outline-offs
 <button type="button" class="logout" id="logout">Cerrar sesi?n</button>
   </div>
 
-  <p class="intro">Cat?logo de ejemplo ? General, acad?mico y finanzas. Los cambios en los controles son temporales; usa Exportar Excel para conservarlos.</p>
+  <p class="intro">Catálogo de ejemplo · General, académico y finanzas. Los cambios se recuperan en este navegador al volver a ingresar. No se sincronizan entre equipos; puedes exportarlos a Excel.</p>
+  <p class="intro" id="saveStatus" role="status" aria-live="polite">Guardado automático en este navegador.</p>
   <section class="sheet">
     
     <article class="report" data-report="1" data-area="Académico">
@@ -490,6 +491,7 @@ document.querySelectorAll('.report').forEach(report=>{
     } else {
       select.value=[...select.options].find(o=>o.text.toLowerCase()===value.toLowerCase()).value;
     }
+    select.dispatchEvent(new Event('change', {bubbles:true}));
   });
 });
 
@@ -781,5 +783,6 @@ modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('o
 document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('open')});
 </script>
 <script src="login.js"></script>
+<script src="persistence.js"></script>
 </body>
 </html>
