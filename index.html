@@ -208,10 +208,41 @@ th{font-size:11px}td{font-size:12px;line-height:1.5}code{font-size:11px}.close{w
 button:focus-visible,select:focus-visible{outline:3px solid #773247;outline-offset:3px}
 @media(max-width:650px){.page{padding:16px 10px}.brand{width:100%}.legend{margin-left:0}.report{padding:10px}.meta-row{grid-template-columns:1fr}.report-top{grid-template-columns:42px minmax(0,1fr)}.dictionary{grid-column:2;grid-row:3;justify-self:start}.description{display:block}.identity strong{white-space:normal;overflow-wrap:anywhere}.identity span{display:block}}
 
+
+[hidden]{display:none!important}
+.login-screen{min-height:100dvh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at top,#ead2da80,transparent 65%)}
+.login-card{width:100%;max-width:400px;padding:36px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 60px #272a2e12}
+.login-card .logo{margin-bottom:24px;width:44px;height:44px;font-size:18px}
+.login-card h1{margin:0 0 8px;font-size:26px}.login-card p{color:var(--muted);font-size:14px;line-height:1.6}
+.login-card label{display:block;font-size:13px;font-weight:600;margin:20px 0 8px}
+.login-card input{display:block;width:100%;height:44px;border:1px solid #cfd4d8;border-radius:8px;padding:0 12px;font:inherit}
+.login-card input:focus-visible{outline:3px solid #ead2da;border-color:var(--wine)}
+.login-submit{width:100%;margin-top:24px;height:44px;border:0;border-radius:8px;background:var(--wine);color:white;font-size:14px;font-weight:700;cursor:pointer}
+.login-card .login-error{color:#a41e35;min-height:22px;margin:12px 0 0;font-size:13px}
+.login-card .login-note{font-size:12px;margin-top:20px}
+.logout{border:1px solid #d3d7db;border-radius:6px;background:white;padding:8px 12px;cursor:pointer;color:var(--wine);font-weight:600}
 </style>
 </head>
 <body>
-<main class="page">
+<section class="login-screen" id="loginScreen" aria-labelledby="loginTitle">
+  <div class="login-card">
+    <div class="logo" aria-hidden="true">R</div>
+    <h1 id="loginTitle">Reportes generales</h1>
+    <p>Ingresa tus credenciales para abrir el cat?logo.</p>
+    <form id="loginForm">
+      <label for="username">Usuario</label>
+      <input id="username" name="username" autocomplete="username" required autocapitalize="none" spellcheck="false">
+      <label for="password">Contrase?a</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button class="login-submit" type="submit">Ingresar</button>
+      <p id="loginError" class="login-error" role="alert" aria-live="polite"></p>
+    </form>
+    <p class="login-note">Acceso de demostraci?n ? Cat?logo de ejemplos.</p>
+    <noscript><p>Activa JavaScript para usar el formulario.</p></noscript>
+  </div>
+</section>
+
+<main class="page" id="catalog" hidden>
   <div class="topbar">
     <div class="brand"><div class="logo">E</div><strong>Catálogo de consultas Campus · Segunda hoja</strong></div>
     
@@ -222,6 +253,7 @@ button:focus-visible,select:focus-visible{outline:3px solid #773247;outline-offs
     </div>
 <button class="excel-btn" id="exportExcel" type="button">Exportar Excel</button>
 <span class="counter">3 reportes de ejemplo</span>
+<button type="button" class="logout" id="logout">Cerrar sesi?n</button>
   </div>
 
   <p class="intro">Cat?logo de ejemplo ? General, acad?mico y finanzas. Los cambios en los controles son temporales; usa Exportar Excel para conservarlos.</p>
@@ -739,5 +771,6 @@ document.getElementById('closeModal').addEventListener('click',()=>modal.classLi
 modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('open')});
 </script>
+<script src="login.js"></script>
 </body>
 </html>
